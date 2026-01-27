@@ -1,0 +1,22 @@
+{{ block title }}Waiting for Players{{ endblock }}
+{{ block content }}
+<div class="sequential-wait text-center">
+    <h1>Please Wait</h1>
+
+    {% if player.id_in_group > 1 %}
+    <p class="mb-1">Waiting for the previous players to make their decisions...</p>
+    {% endif %}
+    <p class="mb-1">There are {{ C.OTHER_PLAYERS}} other participant(s)</p>
+    <p class="mb-0">This page will automatically advance when all prior players have decided.</p>
+
+    <div class="spinner-border text-primary mt-4" role="status">
+    </div>
+</div>
+
+<script>
+    // Auto-refresh every 2 seconds to check if prior players have decided
+    setTimeout(function () {
+        window.location.reload();
+    }, 2000);
+</script>
+{{ endblock }}

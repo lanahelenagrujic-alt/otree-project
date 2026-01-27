@@ -1,0 +1,132 @@
+{{ block title }}Investment Decision{{ endblock }}
+
+{{ block content }}
+
+<h1>Round {{ subsession.round_number }} of {{ C.NUM_ROUNDS }}</h1>
+
+{% if is_first_player %}
+<div class="alert alert-info">
+    <h3>You are the first one to decide</h3>
+    <p>Your choice will be visible to the subsequent players in your group.</p>
+</div>
+{% else %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h3>Prior Choices in Your Group</h3>
+        {% if can_see_prior %}
+        {% if prior_choices %}
+        <p>The following choices have been made before you:</p>
+        <ul class="list-group">
+            {% for choice in prior_choices %}
+            <li class="list-group-item">Option {{ choice }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No prior choices are available yet.</p>
+        {% endif %}
+        {% else %}
+        <div class="alert alert-warning">
+            <strong>You cannot see prior choices in this round.</strong><br>
+            In this round, your visibility of other players choices is restricted.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+
+<div class="card">
+    <div class="card-body">
+        {% if advisor_message %} <!-- Display advisor's recommendation if available (for future if needed) -->
+        <div class="alert alert-secondary d-flex align-items-center justify-content-between mb-4"
+            style="padding: 1rem 1.25rem;">
+            <div>
+                <strong>Advisor's Recommendation (Accuracy {{ C.ADVISOR_CORRECTION_THRESHOLD_PERCENT }}%):</strong><br>
+                <span style="font-size: 1.15rem;">{{ advisor_message }}</span>
+
+                {% if stock_price %}
+                <br><br>
+                <strong>Current Stock Price:</strong> {{ stock_price }}
+                {% else %}
+                <br><br>
+                <strong>Stock Price:</strong> Based on supply and demand
+                {% endif %}
+
+            </div>
+
+            <div class="circular-progress ms-3" style="--progress: {{ C.ADVISOR_CORRECTION_THRESHOLD_PERCENT }}; 
+                --color: {% if C.ADVISOR_CORRECTION_THRESHOLD_PERCENT <= 25 %}#FF0000
+                         {% elif C.ADVISOR_CORRECTION_THRESHOLD_PERCENT <= 50 %}#FF9500
+                         {% elif C.ADVISOR_CORRECTION_THRESHOLD_PERCENT <= 75 %}#A4C639
+                         {% elif C.ADVISOR_CORRECTION_THRESHOLD_PERCENT <= 100 %}#2E8B57{% endif %}">
+                <svg class="progress-ring" viewBox="0 0 100 100">
+                    <circle class="progress-bg" cx="50" cy="50" r="42"></circle>
+                    <circle class="progress-bar" cx="50" cy="50" r="42"></circle>
+                </svg>
+                <div class="progress-text">{{ C.ADVISOR_CORRECTION_THRESHOLD_PERCENT }}%</div>
+            </div>
+        </div>
+        {% endif %}
+        <h3>Your Decision</h3>
+        <form method="post">
+            {{ formfield "investment_choice" }}
+            {{ next_button }}
+        </form>
+    </div>
+</div>
+
+<style>
+    .circular-progress {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+
+    .progress-ring {
+        fill: cornsilk;
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+    }
+
+    .progress-bg {
+        fill: white;
+        stroke: #ffffff88;
+        /* semi-transparent white for contrast on yellow bg */
+        stroke-width: 10;
+    }
+
+    .progress-bar {
+        fill: none;
+        stroke: var(--color);
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 264;
+        stroke-dashoffset: calc(264 - (264 * var(--progress)) / 100);
+        transition: stroke-dashoffset 0.4s ease;
+    }
+
+    .progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--color);
+    }
+</style>
+
+{% if not allow_abstain %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            /*if (radio.value === '{{ C.ABSTAIN }}') radio.disabled = true;*/ /* Disable (gray out) abstain option */
+            if (radio.value === '{{ C.ABSTAIN }}') radio.parentElement.style.display = 'none'; /* Hide abstain option */
+        });
+    });
+</script>
+{% endif %}
+
+{{ endblock }}

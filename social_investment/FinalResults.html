@@ -1,0 +1,12 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Final Results{{ endblock }}
+
+{{ block content }}
+<div class="alert alert-info mt-4">
+    <h4>Experiment Complete!</h4>
+    <p class="mb-1">Your final earnings: <strong>{{ total_payoff }}</strong></p>
+    <p class="mb-1">You followed the advisor's suggestion a total of <strong>{{ total_followed_adviser }}</strong>
+        time(s).</p>
+    <p class="mb-1">Thank you for participating!</p>
+</div>
+{{ endblock }}

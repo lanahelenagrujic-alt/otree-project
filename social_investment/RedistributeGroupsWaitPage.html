@@ -1,0 +1,21 @@
+{{ block title }}Waiting for Other Groups{{ endblock }}
+{{ block content }}
+<div class="wait-page text-center">
+    <h1>Round {{ subsession.round_number }} Complete!</h1>
+
+    <div class="alert alert-info pt-4">
+        <h4>Your group has finished making decision this round</h4>
+        <p>Waiting for all other groups to make their decisions...</p>
+    </div>
+
+    <p class="mb-1">There are <strong>{{ C.NUM_GROUPS }} groups</strong> participating.</p>
+    <p class="mb-1">Once all groups finish, <strong>Round {{ next_round }}</strong> will begin.</p>
+    <p class="text-secondary fw-bold fst-italic">
+        (You will be reassigned to a new group in the next round)
+    </p>
+
+    <div class="spinner-border text-primary mt-4" role="status"></div>
+
+    <p class="text-muted mt-3"><small>You will automatically proceed when ready.</small></p>
+</div>
+{{ endblock }}

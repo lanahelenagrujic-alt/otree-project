@@ -1,0 +1,12 @@
+{{ block title }}Waiting for Other Players{{ endblock }}
+{{ block content }}
+<div class="wait-page text-center">
+    <h1>Please Wait</h1>
+    <p class="mb-1">Waiting for all members of your group to make their decisions...</p>
+    <p class="mb-0">Your group has {{ C.PLAYERS_PER_GROUP }} members.</p>
+
+    <div class="spinner-border text-primary mt-4" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+{{ endblock }}

@@ -1,0 +1,68 @@
+{{ block title }}Round Results{{ endblock }}
+{{ block content }}
+<h1>Results for Round {{ subsession.round_number }}</h1>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h3>Round Outcome</h3>
+        <p class="mb-1">The successful option for this round was: <strong>Option {{ successful_option }}</strong></p>
+        <p>You selected: <strong>Option {{ player_choice }}</strong></p>
+
+        {% if player_choice == C.ABSTAIN %}
+        <div class="alert alert-info">
+            🤝 You chose to abstain from investing. No penalty applied.
+        </div>
+        {% elif is_correct %}
+        <div class="alert alert-success">
+            ✅ Correct! You earned <strong>{{ base_payoff }}</strong> for this round.
+        </div>
+        {% else %}
+        <div class="alert alert-danger">
+            ❌ Incorrect.
+            {% if base_payoff < 0 %} You lost <strong>{{ base_payoff }}</strong> this round.
+                {% else %}
+                No points awarded this round.
+                {% endif %}
+        </div>
+        {% endif %}
+        {% if endowment_round > 0 %}
+        <div class="alert alert-info">
+            Your initial endowment for this round was <strong>{{ endowment_round }}</strong>.
+            <!--
+            {% if transaction_cost > 0 %}
+            <br> Transaction cost for this round was <strong> {{ transaction_cost }} </strong> </br>
+            {% endif %}
+            -->
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4>Your Earnings</h4>
+            <p class="mb-1"><strong>This round:</strong> {{ round_payoff }}</p>
+            <p class="mb-0"><strong>Total so far:</strong> {{ total_payoff }}</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>Advisor Follow-Up</h4>
+            <p class="mb-1">This round you
+                {% if player_choice == advisor_option %}
+                followed the advisor's recommendation.
+                {% else %}
+                did not follow the advisor's recommendation.
+                {% endif %}
+            </p>
+            <p class="mb-0">You followed the advisor's recommendation <strong>{{ total_followed_adviser }}</strong>
+                time(s)
+                so far.
+            </p>
+        </div>
+
+    </div>
+    <p class="mt-3">Get ready for the next round...</p>
+</div>
+{{ next_button }}
+{{ endblock }}
