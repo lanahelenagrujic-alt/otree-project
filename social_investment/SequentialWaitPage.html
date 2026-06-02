@@ -1,20 +1,20 @@
-{{ block title }}Waiting for Players{{ endblock }}
+{{ block title }}Prosimo, da počakate na druge udeležence{{ endblock }}
 {{ block content }}
 <div class="sequential-wait text-center">
-    <h1>Please Wait</h1>
+    <h1>Prosimo počakajte</h1>
 
     {% if player.id_in_group > 1 %}
-    <p class="mb-1">Waiting for the previous players to make their decisions...</p>
+    <p class="mb-1">Prosimo, da počakate na soudeležence...</p>
     {% endif %}
-    <p class="mb-1">There are {{ C.OTHER_PLAYERS}} other participant(s)</p>
-    <p class="mb-0">This page will automatically advance when all prior players have decided.</p>
+    <p class="mb-1">V vaši skupini sta{{ C.OTHER_PLAYERS}} druga udeleženca</p>
+    <p class="mb-0">Ko bodo pripravljeni vsi udeleženci, se eksperiment nadaljuje.</p>
 
     <div class="spinner-border text-primary mt-4" role="status">
     </div>
 </div>
 
 <script>
-    // Auto-refresh every 2 seconds to check if prior players have decided
+    // Prosimo osvežite stran.
     setTimeout(function () {
         window.location.reload();
     }, 2000);
