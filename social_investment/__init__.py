@@ -3,30 +3,32 @@ import random # for random choice and advisor probability
 
 
 doc = """
-Financial Decision Experiment:
+### Navodila za eksperiment
 
-Overview:
-Participants are organized into multiple groups per round, with each group containing 
-a fixed number of players (PLAYERS_PER_GROUP). Each group receives one randomly 
-determined 'successful' investment option (either Option A or Option B).
+1. V vsakem krogu boste razporejeni v skupino z več drugimi udeleženci.
 
-Sequence per Round:
-1. Groups are formed at the start of each round (players are grouped randomly).
-2. Within each group, players make their investment choices sequentially, one after another.
-3. An advisor gives each player a recommendation, which may be correct or incorrect, based 
-   on a predefined probability threshold (ADVISOR_CORRECTION_THRESHOLD_PERCENT).
-4. Payoffs are calculated as: correct choices earn a reward, incorrect choices earn no reward 
-   or a penalty (if defined) and transaction costs are deducted from all payoffs.
+2. Vsaki skupini bo naključno dodeljena ena uspešna investicijska možnost (A ali B).
 
-Group Redistribution:
-- At the end of every round except the last, players are redistributed cyclically:
-  the position of a player within their group is used to determine which group they join next.
-- This guarantees players interact with different group members across rounds, 
-  promoting randomness to the experiment.
+3. Člani skupine bodo svoje odločitve sprejemali zaporedno, eden za drugim.
 
-End of Experiment:
-- After the final round, total payoff and total times the advisor was followed 
-  are shown to each participant.
+4. Pred sprejemom odločitve boste prejeli priporočilo svetovalca. Priporočilo je lahko pravilno ali nepravilno, saj je njegova točnost odvisna od natančnosti svetovalca. Ob priporočilu bo prikazana tudi stopnja prepričanosti svetovalca v pravilnost njegovega nasveta. Sami se odločite, ali boste priporočilo upoštevali ali ga prezrli.
+
+5. Če niste prvi član skupine, boste pred sprejemom odločitve videli tudi odločitve predhodnih članov skupine.
+
+6. V prvem krogu se lahko odločite tudi, da ne izberete nobene možnosti. V vseh naslednjih krogih bo izbira ene izmed ponujenih možnosti obvezna.
+
+7. Na podlagi razpoložljivih informacij boste izbrali investicijsko možnost A ali B.
+
+8. Če izberete uspešno investicijsko možnost, prejmete nagrado. Če izberete neuspešno možnost, ne prejmete nagrade oziroma prejmete kazen, če je ta določena. Od vseh izplačil se odštejejo transakcijski stroški.
+
+9. Po vsakem krogu boste prerazporejeni v novo skupino z drugimi udeleženci.
+
+10. Po zaključku eksperimenta boste videli svoj skupni rezultat ter število primerov, ko ste sledili priporočilu svetovalca.
+
+11. Sodelovanje v eksperimentu je popolnoma anonimno. Vsi zbrani podatki bodo obravnavani zaupno in uporabljeni izključno za namene raziskave.
+
+12. Vse informacije, prikazane v eksperimentu, vključno s cenami, donosi, stroški in morebitnimi nagradami, so fiktivne ter namenjene izključno simulaciji investicijskega odločanja.
+
 """
 
 # --------------------------------------------------------------------
