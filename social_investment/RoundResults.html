@@ -1,36 +1,36 @@
-{{ block title }}Round Results{{ endblock }}
+{{ block title }}Rezultati kroga{{ endblock }}
 {{ block content }}
-<h1>Results for Round {{ subsession.round_number }}</h1>
+<h1>Rezultati kroga {{ subsession.round_number }}</h1>
 
 <div class="card mb-3">
     <div class="card-body">
-        <h3>Round Outcome</h3>
-        <p class="mb-1">The successful option for this round was: <strong>Option {{ successful_option }}</strong></p>
-        <p>You selected: <strong>Option {{ player_choice }}</strong></p>
+        <h3>Izid kroga</h3>
+        <p class="mb-1">Pravilna odločitev je bila: <strong>Možnost {{ successful_option }}</strong></p>
+        <p>Izbrali ste: <strong>Možnost {{ player_choice }}</strong></p>
 
         {% if player_choice == C.ABSTAIN %}
         <div class="alert alert-info">
-            🤝 You chose to abstain from investing. No penalty applied.
+            🤝 Niste izbrali odgovora.
         </div>
         {% elif is_correct %}
         <div class="alert alert-success">
-            ✅ Correct! You earned <strong>{{ base_payoff }}</strong> for this round.
+            ✅ Pravilno! Zaslužili ste <strong>{{ base_payoff }}</strong> v tem krogu.
         </div>
         {% else %}
         <div class="alert alert-danger">
-            ❌ Incorrect.
-            {% if base_payoff < 0 %} You lost <strong>{{ base_payoff }}</strong> this round.
+            ❌ Napačno.
+            {% if base_payoff < 0 %} Izgubili ste <strong>{{ base_payoff }}</strong> v tem krogu.
                 {% else %}
-                No points awarded this round.
+               V tem krogu ste brez zaslužka.
                 {% endif %}
         </div>
         {% endif %}
         {% if endowment_round > 0 %}
         <div class="alert alert-info">
-            Your initial endowment for this round was <strong>{{ endowment_round }}</strong>.
+            Vaš začetni sklad za ta krog je bil <strong>{{ endowment_round }}</strong>.
             <!--
             {% if transaction_cost > 0 %}
-            <br> Transaction cost for this round was <strong> {{ transaction_cost }} </strong> </br>
+            <br> Transakcijski stroški za ta krog so bili <strong> {{ transaction_cost }} </strong> </br>
             {% endif %}
             -->
         </div>
@@ -39,30 +39,29 @@
 
     <div class="card">
         <div class="card-body">
-            <h4>Your Earnings</h4>
-            <p class="mb-1"><strong>This round:</strong> {{ round_payoff }}</p>
-            <p class="mb-0"><strong>Total so far:</strong> {{ total_payoff }}</p>
+            <h4>Vaši zaslužki</h4>
+            <p class="mb-1"><strong>Ta krog:</strong> {{ round_payoff }}</p>
+            <p class="mb-0"><strong>Skupno:</strong> {{ total_payoff }}</p>
         </div>
     </div>
 
     <div class="card mt-4">
         <div class="card-body">
-            <h4>Advisor Follow-Up</h4>
-            <p class="mb-1">This round you
+            <h4>Spremljanje svetovalca</h4>
+            <p class="mb-1">V tem krogu
                 {% if player_choice == advisor_option %}
-                followed the advisor's recommendation.
+                 ste sledili priporočilu svetovalca.
                 {% else %}
-                did not follow the advisor's recommendation.
+                niste sledili priporočilu svetovalca.
                 {% endif %}
             </p>
-            <p class="mb-0">You followed the advisor's recommendation <strong>{{ total_followed_adviser }}</strong>
-                time(s)
-                so far.
+            <p class="mb-0">Priporočilu svetovalca ste sledili <strong>{{ total_followed_adviser }}</strong>
+                krat
             </p>
         </div>
 
     </div>
-    <p class="mt-3">Get ready for the next round...</p>
+    <p class="mt-3">Sledi naslednji krog...</p>
 </div>
 {{ next_button }}
 {{ endblock }}
