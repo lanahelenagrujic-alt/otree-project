@@ -4,18 +4,18 @@
     <h1>Krog {{ subsession.round_number }} je končan!</h1>
 
     <div class="alert alert-info pt-4">
-        <h4>Your group has finished making decision this round</h4>
-        <p>Waiting for all other groups to make their decisions...</p>
+        <h4>Vaša skupina je končala s tem krogom</h4>
+        <p>Prosimo počakajte na preostale skupine...</p>
     </div>
 
-    <p class="mb-1">There are <strong>{{ C.NUM_GROUPS }} groups</strong> participating.</p>
-    <p class="mb-1">Once all groups finish, <strong>Round {{ next_round }}</strong> will begin.</p>
+    <p class="mb-1">Trenutno sodeluje <strong>{{ C.NUM_GROUPS }} skupin. </p>
+    <p class="mb-1">Ko vse skupine končajo, <strong>se prične {{ next_round }}</strong> krog.</p>
     <p class="text-secondary fw-bold fst-italic">
-        (You will be reassigned to a new group in the next round)
+        (V naslednjem krogu boste dodeljeni v drugo skupino)
     </p>
 
     <div class="spinner-border text-primary mt-4" role="status"></div>
 
-    <p class="text-muted mt-3"><small>You will automatically proceed when ready.</small></p>
+    <p class="text-muted mt-3"><small>Ko boste pripravljeni, se eksperiment nadaljuje.</small></p>
 </div>
 {{ endblock }}
