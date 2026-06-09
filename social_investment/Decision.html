@@ -1,33 +1,33 @@
-{{ block title }}Investicijska odločitev{{ endblock }}
+{{ block title }}Investment Decision{{ endblock }}
 
 {{ block content }}
 
-<h1>Krog {{ subsession.round_number }} od {{ C.NUM_ROUNDS }}</h1>
+<h1>Round {{ subsession.round_number }} of {{ C.NUM_ROUNDS }}</h1>
 
 {% if is_first_player %}
 <div class="alert alert-info">
-    <h3>V tem krogu vi prvi sprejemate odločitev</h3>
-    <p>Vaše odločitve bodo vidne drugim udeležencem.</p>
+    <h3>You are the first one to decide</h3>
+    <p>Your choice will be visible to the subsequent players in your group.</p>
 </div>
 {% else %}
 <div class="card mb-4">
     <div class="card-body">
-        <h3>Odločitve drugih udeležencev v vaši skupini</h3>
+        <h3>Prior Choices in Your Group</h3>
         {% if can_see_prior %}
         {% if prior_choices %}
-        <p>Pred vami, so udeleženci izbrali:</p>
+        <p>The following choices have been made before you:</p>
         <ul class="list-group">
             {% for choice in prior_choices %}
             <li class="list-group-item">Option {{ choice }}</li>
             {% endfor %}
         </ul>
         {% else %}
-        <p>Na voljo ni odločitev drugih udeležencev.</p>
+        <p>No prior choices are available yet.</p>
         {% endif %}
         {% else %}
         <div class="alert alert-warning">
-            <strong>V tem krogu nimate vpogleda v odločitve vaših soudeležencev.</strong><br>
-            V tem krogu je vaša vidljivost izbir drugih igralcev omejena.
+            <strong>You cannot see prior choices in this round.</strong><br>
+            In this round, your visibility of other players choices is restricted.
         </div>
         {% endif %}
     </div>
@@ -41,15 +41,15 @@
         <div class="alert alert-secondary d-flex align-items-center justify-content-between mb-4"
             style="padding: 1rem 1.25rem;">
             <div>
-                <strong>Priporočilo svetovalca (Zagotovost {{ C.ADVISOR_CORRECTION_THRESHOLD_PERCENT }}%):</strong><br>
+                <strong>Advisor's Recommendation (Accuracy {{ C.ADVISOR_CORRECTION_THRESHOLD_PERCENT }}%):</strong><br>
                 <span style="font-size: 1.15rem;">{{ advisor_message }}</span>
 
                 {% if stock_price %}
                 <br><br>
-                <strong>Trenutna cena delnice:</strong> {{ stock_price }}
+                <strong>Current Stock Price:</strong> {{ stock_price }}
                 {% else %}
                 <br><br>
-                <strong>Cena delnice:</strong> Na podlagi povpraševanja in ponudbe
+                <strong>Stock Price:</strong> Based on supply and demand
                 {% endif %}
 
             </div>
@@ -67,7 +67,7 @@
             </div>
         </div>
         {% endif %}
-        <h3>Vaša odločitev</h3>
+        <h3>Your Decision</h3>
         <form method="post">
             {{ formfield "investment_choice" }}
             {{ next_button }}

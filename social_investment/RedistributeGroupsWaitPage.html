@@ -1,21 +1,21 @@
-{{ block title }}Prosimo, da počakate na preostale skupine{{ endblock }}
+{{ block title }}Waiting for Other Groups{{ endblock }}
 {{ block content }}
 <div class="wait-page text-center">
-    <h1>Krog {{ subsession.round_number }} je končan!</h1>
+    <h1>Round {{ subsession.round_number }} Complete!</h1>
 
     <div class="alert alert-info pt-4">
-        <h4>Vaša skupina je končala s tem krogom</h4>
-        <p>Prosimo počakajte na preostale skupine...</p>
+        <h4>Your group has finished making decision this round</h4>
+        <p>Waiting for your actual group members to finish this round...</p>
     </div>
 
-    <p class="mb-1">Trenutno sodeluje <strong>{{ C.NUM_GROUPS }} skupin. </p>
-    <p class="mb-1">Ko vse skupine končajo, <strong>se prične {{ next_round }}</strong> krog.</p>
+    <p class="mb-1">There are <strong>{{ num_groups }} groups</strong> participating.</p>
+    <p class="mb-1">Once all groups finish, <strong>Round {{ next_round }}</strong> will begin.</p>
     <p class="text-secondary fw-bold fst-italic">
-        (V naslednjem krogu boste dodeljeni v drugo skupino)
+        (You will be reassigned to a new group in the next round)
     </p>
 
     <div class="spinner-border text-primary mt-4" role="status"></div>
 
-    <p class="text-muted mt-3"><small>Ko boste pripravljeni, se eksperiment nadaljuje.</small></p>
+    <p class="text-muted mt-3"><small>You will automatically proceed when ready.</small></p>
 </div>
 {{ endblock }}
