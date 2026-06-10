@@ -1,19 +1,19 @@
-{{ block title }}Waiting for Players{{ endblock }}
+{{ block title }}Prosimo, da počakate na ostale udeležence{{ endblock }}
 {{ block content }}
 <div class="setup-wait text-center">
-    <h1>Please Wait</h1>
+    <h1>Prosimo, da počakate</h1>
 
     {% if player.subsession.participant_joining_closed %}
     <div class="alert alert-warning" role="alert">
-        <h4>Participant Joining Closed</h4>
-        <p>The participant joining period has ended. Groups are being formed with available participants...</p>
+        <h4>Sprejem novih udeležencev je zaključen</h4>
+        <p>Obdobje prijave udeležencev se je zaključilo. Na podlagi razpoložljivih udeležencev se oblikujejo skupine ...</p>
     </div>
     {% else %}
     <div class="timer-container mb-4">
-        <h3>Time Remaining to Join:</h3>
+        <h3>Preostali čas za prijavo:</h3>
         <div class="timer-display" id="countdown">
             {% if timer_expired %}
-            Time's Up!
+            Čas je potekel!
             {% else %}
             {{ remaining_time }}s
             {% endif %}
@@ -26,9 +26,8 @@
         </div>
     </div>
 
-    <p class="mb-1">Waiting for participants to join the experiment...</p>
-    <p class="mb-0">The experiment will start automatically when the timer ends or when all expected participants have
-        joined.</p>
+    <p class="mb-1">Prosimo, da počakate na preostale udeležence...</p>
+    <p class="mb-0">Eksperiment se bo samodejno začel, ko se odštevalnik časa izteče ali ko se pridružijo vsi predvideni udeleženci...</p>
     {% endif %}
 
     <div class="spinner-border text-primary mt-4" role="status">
