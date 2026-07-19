@@ -4,20 +4,30 @@ import math
 
 
 doc = """
-Eksperiment finančnega odločanja v socialnem okolju
+Financial Decision Experiment:
 
-V vsakem krogu boste razporejeni v skupino z več drugimi udeleženci.
-Vsaki skupini bo naključno dodeljena ena uspešna investicijska možnost (A ali B).
-Člani skupine bodo svoje odločitve sprejemali zaporedno, eden za drugim.
-Pred sprejemom odločitve boste prejeli priporočilo svetovalca. Priporočilo je lahko pravilno ali nepravilno, saj je njegova točnost odvisna od natančnosti svetovalca. Ob priporočilu bo prikazana tudi stopnja prepričanosti svetovalca v pravilnost njegovega nasveta. Sami se odločite, ali boste priporočilo upoštevali ali ga prezrli.
-Če niste prvi član skupine, boste pred sprejemom odločitve videli tudi odločitve predhodnih članov skupine.
-V prvem krogu se lahko odločite tudi, da ne izberete nobene možnosti. V vseh naslednjih krogih bo izbira ene izmed ponujenih možnosti obvezna.
-Na podlagi razpoložljivih informacij boste izbrali investicijsko možnost A ali B.
-Če izberete uspešno investicijsko možnost, prejmete nagrado. Če izberete neuspešno možnost, ne prejmete nagrade oziroma prejmete kazen, če je ta določena. Od vseh izplačil se odštejejo transakcijski stroški.
-Po vsakem krogu boste prerazporejeni v novo skupino z drugimi udeleženci.
-Po zaključku eksperimenta boste videli svoj skupni rezultat ter število primerov, ko ste sledili priporočilu svetovalca.
-Sodelovanje v eksperimentu je popolnoma anonimno. Vsi zbrani podatki bodo obravnavani zaupno in uporabljeni izključno za namene raziskave.
-Vse informacije, prikazane v eksperimentu, vključno s cenami, donosi, stroški in morebitnimi nagradami, so fiktivne ter namenjene izključno simulaciji investicijskega odločanja.
+Overview:
+Participants are organized into multiple groups per round, with each group containing 
+a fixed number of players (PLAYERS_PER_GROUP). Each group receives one randomly 
+determined 'successful' investment option (either Option A or Option B).
+
+Sequence per Round:
+1. Groups are formed at the start of each round (players are grouped randomly).
+2. Within each group, players make their investment choices sequentially, one after another.
+3. An advisor gives each player a recommendation, which may be correct or incorrect, based 
+   on a predefined probability threshold (ADVISOR_CORRECTION_THRESHOLD_PERCENT).
+4. Payoffs are calculated as: correct choices earn a reward, incorrect choices earn no reward 
+   or a penalty (if defined) and transaction costs are deducted from all payoffs.
+
+Group Redistribution:
+- At the end of every round except the last, players are redistributed cyclically:
+  the position of a player within their group is used to determine which group they join next.
+- This guarantees players interact with different group members across rounds, 
+  promoting randomness to the experiment.
+
+End of Experiment:
+- After the final round, total payoff and total times the advisor was followed 
+  are shown to each participant.
 """
 
 # --------------------------------------------------------------------
@@ -61,6 +71,11 @@ class Group(BaseGroup):
 
 # Player holds participant-specific state. (It stores each player's investment choice and advisor-following count)
 class Player(BasePlayer):
+    gender = models.StringField(
+        choices=['Male', 'Female'],
+        widget=widgets.RadioSelect,
+        label='Specify Gender Please?'
+        ) 
 
     investment_choice = models.StringField(
         #choices=lambda p: C.CHOICES + ([C.ABSTAIN] if C.ALLOW_ABSTAIN[p.round_number - 1] else []),
@@ -236,7 +251,14 @@ class Introduction(Page):
             'transaction_cost_round3_optionA': C.TRANSACTION_COSTS[2][0],
             'transaction_cost_round3_optionB': C.TRANSACTION_COSTS[2][1],
         }
+# Gender page 
+class Gender(Page):
+    form_model = 'player'
+    form_fields = ['gender']
 
+    def is_displayed(self):
+        return self.round_number == 1
+    
 # Wait page to ensure sequential decision making by players in a group
 class SequentialWaitPage(Page): # Tried making it a WaitPage but it didn't work as intended because WaitPage waits for all players in a group/subsession etc.
     # Wait so player decisions are sequential by id_in_group. Player with id_in_group=1 decides first, then id_in_group=2, etc.
@@ -560,6 +582,7 @@ class FinalResults(Page):
 page_sequence = [
     SetupRoundWaitPage,  # Ensures successful_option is set before decisions
     Introduction, # shown only in round 1
+    Gender, # shown only in round 1
     SequentialWaitPage, # Ensures sequential decision making
     Decision, # Investment decision page
     ResultsWaitPage, # Calculate payoffs after all decisions by all players
@@ -682,6 +705,9 @@ def custom_export(players):
         # Round 3 → incorrect → count stays 1.
         # So num_correct = 1.
 
+        round1_player = min(part_players, key=lambda p: p.round_number)
+        gender = round1_player.field_maybe_none('gender') or ''
+
         num_correct = sum(
             1 for pp in part_players
             # There are extra conditions here to avoid AttributeError that i faced earlier. I am scared to remove them now.
@@ -700,6 +726,7 @@ def custom_export(players):
         yield [
             custom_id,
             part_code,
+            gender,
             num_correct,
             num_incorrect,
             times_followed_adviser,
