@@ -72,7 +72,7 @@ class Group(BaseGroup):
 # Player holds participant-specific state. (It stores each player's investment choice and advisor-following count)
 class Player(BasePlayer):
     gender = models.StringField(
-        choices=['Male', 'Female'],
+        choices=['Moški', 'Ženski'],
         widget=widgets.RadioSelect,
         label='Specify Gender Please?'
         ) 
