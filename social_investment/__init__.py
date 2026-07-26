@@ -74,7 +74,7 @@ class Player(BasePlayer):
     gender = models.StringField(
         choices=['Moški', 'Ženski'],
         widget=widgets.RadioSelect,
-        label='Specify Gender Please?'
+        label='Prosimo izberite spol'
         ) 
 
     investment_choice = models.StringField(
@@ -686,6 +686,7 @@ def custom_export(players):
     yield [
         'ID',
         'participant_code',
+        'gender',
         'num_correct',
         'num_incorrect',
         'times_followed_adviser',
