@@ -437,7 +437,6 @@ class RoundResults(Page):
             'round_payoff': self.payoff,
             'total_payoff': sum(p.payoff for p in self.in_all_rounds()),
             'transaction_cost': self.transaction_cost,
-            'stock_price': self.group.stock_price,
             'advisor_option': self.advisor_option,
             'total_followed_adviser': sum(p.is_advisor_followed for p in self.in_all_rounds()),
             'endowment_round': self.endowment,
