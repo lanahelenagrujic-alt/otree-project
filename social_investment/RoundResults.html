@@ -14,12 +14,13 @@
         </div>
         {% elif is_correct %}
         <div class="alert alert-success">
-            ✅ Pravilno! zaslužili ste <strong>{{ base_payoff }}</strong> v tem krogu.
+            ✅ Pravilna odločitev. Za pravilno odločitev ste prejeli
+<strong>{{ base_payoff }}</strong>.
         </div>
         {% else %}
         <div class="alert alert-danger">
-            ❌ Napačno.
-            {% if base_payoff < 0 %} Izgubili ste <strong>{{ base_payoff }}</strong> v tem krogu.
+            ❌ Napačna odločitev. Rezultat odločitve znaša
+<strong>{{ base_payoff }}</strong>.
                 {% else %}
                 Brez zasluženih točk v tem krogu.
                 {% endif %}
@@ -38,12 +39,51 @@
     </div>
 
     <div class="card">
-        <div class="card-body">
-            <h4>Vaši zaslužki</h4>
-            <p class="mb-1"><strong>V tem krogu:</strong> {{ round_payoff }}</p>
-            <p class="mb-0"><strong>Skupaj:</strong> {{ total_payoff }}</p>
-        </div>
+    <div class="card-body">
+        <h4>Izračun rezultata</h4>
+
+        {% if player_choice == C.ABSTAIN %}
+            <p class="mb-1">
+                Odločili ste se, da ne boste investirali.
+            </p>
+            <p class="mb-1">
+                <strong>Rezultat kroga:</strong> {{ round_payoff }}
+            </p>
+        {% else %}
+            <p class="mb-1">
+                Začetna vrednost:
+                <strong>{{ endowment_round }}</strong>
+            </p>
+
+            <p class="mb-1">
+                Rezultat odločitve:
+                <strong>{{ base_payoff }}</strong>
+            </p>
+
+            <p class="mb-1">
+                Cena delnice:
+                <strong>−{{ stock_price }}</strong>
+            </p>
+
+            <p class="mb-1">
+                Transakcijski stroški:
+                <strong>−{{ transaction_cost }}</strong>
+            </p>
+
+            <hr>
+
+            <p class="mb-1">
+                <strong>Končni rezultat kroga:</strong>
+                {{ round_payoff }}
+            </p>
+        {% endif %}
+
+        <p class="mb-0">
+            <strong>Skupni rezultat po vseh dosedanjih krogih:</strong>
+            {{ total_payoff }}
+        </p>
     </div>
+</div>
 
     <div class="card mt-4">
         <div class="card-body">
