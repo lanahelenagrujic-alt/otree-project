@@ -50,7 +50,7 @@ class C(BaseConstants):
     # Round Specific Constants
     ENDOWMENT = [cu(0), cu(11), cu(11)] # Initial endowment for each player at the start of each round 1,2,3 respectively
     ALLOW_ABSTAIN = [True, False, False] # Whether players can abstain from investing in each round 1,2,3 respectively
-    ABSTAIN = 'Abstain' # Option for abstaining from investment (only in round 1)
+    ABSTAIN = 'Ne želim odgovoriti' # Option for abstaining from investment (only in round 1)
     TRANSACTION_COSTS = [cu(0), cu(0), [cu(0.1), cu(0.5)]] # Cost deducted from payoffs in each round 1,2,3 respectively / in round 3 different transaction costs for option A and B
     STOCK_PRICES = [cu(2), cu(4), cu(6)]  # Round 1 = fixed price, Round 2 & 3 = supply/demand (maybe manually input)
     
