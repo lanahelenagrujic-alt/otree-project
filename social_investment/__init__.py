@@ -55,7 +55,7 @@ class C(BaseConstants):
     STOCK_PRICES = [cu(2), cu(4), cu(6)]  # Round 1 = fixed price, Round 2 & 3 = supply/demand (maybe manually input)
     
     # Timer Configuration
-    PARTICIPANT_JOIN_TIMEOUT = 20  # 20 seconds - after this time, participant joining is automatically closed
+    PARTICIPANT_JOIN_TIMEOUT = 120  # 120 seconds - after this time, participant joining is automatically closed
 
 # --------------------------------------------------------------------
 # Models
