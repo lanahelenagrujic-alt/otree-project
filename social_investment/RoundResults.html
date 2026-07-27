@@ -14,13 +14,12 @@
         </div>
         {% elif is_correct %}
         <div class="alert alert-success">
-            ✅ Pravilna odločitev. Za pravilno odločitev ste prejeli
-<strong>{{ base_payoff }}</strong>.
+            ✅ Pravilno! zaslužili ste <strong>{{ base_payoff }}</strong> v tem krogu.
         </div>
         {% else %}
         <div class="alert alert-danger">
-            ❌ Napačna odločitev. Rezultat odločitve znaša
-<strong>{{ base_payoff }}</strong>.
+            ❌ Napačno.
+            {% if base_payoff < 0 %} Izgubili ste <strong>{{ base_payoff }}</strong> v tem krogu.
                 {% else %}
                 Brez zasluženih točk v tem krogu.
                 {% endif %}
@@ -38,13 +37,14 @@
         {% endif %}
     </div>
 
-  <div class="card">
-    <div class="card-body">
-        <h4>Vaši zaslužki</h4>
-        <p class="mb-1"><strong>V tem krogu:</strong> {{ round_payoff }}</p>
-        <p class="mb-0"><strong>Skupaj:</strong> {{ total_payoff }}</p>
+    <div class="card">
+        <div class="card-body">
+            <h4>Vaši zaslužki</h4>
+            <p class="mb-1"><strong>V tem krogu:</strong> {{ round_payoff }}</p>
+            <p class="mb-0"><strong>Skupaj:</strong> {{ total_payoff }}</p>
+        </div>
     </div>
-</div>
+
     <div class="card mt-4">
         <div class="card-body">
             <h4>Odzivi na priporočilo svetovalca</h4>
