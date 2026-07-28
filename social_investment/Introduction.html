@@ -1,5 +1,12 @@
+{{ block title }}<h1>Eksperiment finančnega odločanja</h1>{{ endblock }}
+{{ block content }}
+<div class="instructions">
+    <h2>Navodila</h2>
+    <p>Dobrodošli na eksperimentu! Prosimo, da natančno preberete navodila.</p>
  <h3>Splošno</h3>
     <ul>
+        <li>Za sodelovanje je popolnoma anonimno. Vsi rezultati se uporabljajo izključno za namene raziskovalne naloge.</li>
+        <li> Vsi stroški in cene omenjene v eksperimentu so fiktivne</strong>.</li>
         <li>V skupini boste s <strong>{{ C.OTHER_PLAYERS }} drugimi udeleženci</strong>.</li>
         <li>Izbirate med dvema naložbenima možnostma: <strong>Možnost A</strong> ali <strong>Možnost B</strong>.</li>
         <li>Ena možnost bo naključno izbrana kot <strong>uspešna</strong> vsak krog <strong>za vsako skupino</strong>.</li>
@@ -37,12 +44,6 @@
             </ul>
         </li>
     </ul>
-
-{{ block title }}<h1>Eksperiment finančnega odločanja</h1>{{ endblock }}
-{{ block content }}
-<div class="instructions">
-    <h2>Navodila</h2>
-    <p>Dobrodošli na eksperimentu! Prosimo, da natančno preberete navodila.</p>
 
     <h2>Pregled eksperimenta</h2>
     <p>Sodelovali boste v <strong>{{ C.NUM_ROUNDS }} krogih</strong>. Pogoji eksperimenta se med korgi razlikujejo:</p>
