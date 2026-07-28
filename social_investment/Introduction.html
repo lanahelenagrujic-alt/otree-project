@@ -1,43 +1,4 @@
-{{ block title }}<h1>Eksperiment finančnega odločanja</h1>{{ endblock }}
-{{ block content }}
-<div class="instructions">
-    <h2>Navodila</h2>
-    <p>Dobrodošli na eksperimentu! Prosimo, da natančno preberete navodila.</p>
-
-    <h2>Pregled eksperimenta</h2>
-    <p>Sodelovali boste v <strong>{{ C.NUM_ROUNDS }} krogih</strong>. Pogoji eksperimenta se med korgi razlikujejo:</p>
-
-    <h3>Prvi krog</h3>
-    <ul>
-        <li><strong>Začetna vrednost:</strong> {{ endowment_round1 }}</li>
-        <li><strong>Izbira ni obvezna:</strong> Lahko se odločite, da ne boste investirali</li>
-        <li><strong>Fiksna cena:</strong> Fiksna cena delnice je {{ stock_price_round1 }}</li>
-        <li><strong>Vpogled v odločitve drugih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
-        <li><strong>Transakcijski stroški:</strong> {{ transaction_cost_round1 }} </li>
-    </ul>
-
-    <h3>Drugi krog</h3>
-    <ul>
-        <li><strong>Začetna vrednost:</strong> {{ endowment_round2 }}</li>
-        <li><strong>Izbira je obvezna:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
-        <li><strong>Cena delnice:</strong> Določena na podlagi povpraševanja in ponudbe</li>
-        <li><strong>Vpogled v odločitve drugih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
-        <li><strong>Svetovalec:</strong> V tem krogu se pojavi svetovalec, katerega priporočilo ustvari računalniški algoritem</li>
-        <li><strong>Transakcijski stroški:</strong> {{ transaction_cost_round2 }}</li>
-    </ul>
-
-    <h3>Tretji krog</h3>
-    <ul>
-        <li><strong>Začetna vrednost:</strong> {{ endowment_round3 }}</li>
-        <li><strong>Izbira je obvezna:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
-        <li><strong>Cena delnice:</strong> Določena na podlagi povpraševanja in ponudbe</li>
-        <li><strong>Vpogled v odločitve druih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
-        <li><strong>Svetovalec:</strong> V tem krogu se pojavi svetovalec, katerega priporočilo ustvari računalniški algoritem</li>
-        <li><strong>Transakcijski stroški:</strong> Možnost A: {{ transaction_cost_round3_optionA }}, Možnost B: {{
-            transaction_cost_round3_optionB }}</li>
-    </ul>
-
-    <h3>Splošno</h3>
+ <h3>Splošno</h3>
     <ul>
         <li>V skupini boste s <strong>{{ C.OTHER_PLAYERS }} drugimi udeleženci</strong>.</li>
         <li>Izbirate med dvema naložbenima možnostma: <strong>Možnost A</strong> ali <strong>Možnost B</strong>.</li>
@@ -59,14 +20,14 @@
         <li>Odločitve se sprejemajo zaporedno:
             <ul>
                 <li>Prvi udeleženec se odloči.</li>
-                <li>Drugi udeleženec ima vpogled v izbiro prvega udeleženca pred odločitvijo.</li>
-                <li>Tretji udeleženec ima vpogled v izbiro prvega in drugega udeleženca pred odločitvijo...</li>
+                <li>Drugi udeleženec ima (morda) vpogled v izbiro prvega udeleženca pred odločitvijo.</li>
+                <li>Tretji udeleženec ima (morda) vpogled v izbiro prvega in drugega udeleženca pred odločitvijo...</li>
             </ul>
         </li>
         <li>Pred odločitvijo boste prejeli priporočilo svetovalca.</li>
         <li>Svetovalec daje <strong>različna priporočila</strong> udeležencem <strong>tudi znotraj skupine</strong> </li>
         <li>Pravilnost priporočila je odvisna od natančnosti svetovalca. Sami se odločite, ali boste priporočilu sledili ali ga ignorirali..</li>
-        <li>Če niste prvi udeleženec v skupini, boste pred sprejemom svoje odločitve seznanjeni z odločitvami predhodnih članov skupine.  </li>
+        <li>Če niste prvi udeleženec v skupini, boste morda pred sprejemom svoje odločitve seznanjeni z odločitvami predhodnih članov skupine.  </li>
         <li>Pri odločanju lahko:
             <ul>
                 <li>sledite nasvetu vašega svetovalca</li>
@@ -75,6 +36,45 @@
                 <li>ali pa združite različne pristope</li>
             </ul>
         </li>
+    </ul>
+
+{{ block title }}<h1>Eksperiment finančnega odločanja</h1>{{ endblock }}
+{{ block content }}
+<div class="instructions">
+    <h2>Navodila</h2>
+    <p>Dobrodošli na eksperimentu! Prosimo, da natančno preberete navodila.</p>
+
+    <h2>Pregled eksperimenta</h2>
+    <p>Sodelovali boste v <strong>{{ C.NUM_ROUNDS }} krogih</strong>. Pogoji eksperimenta se med korgi razlikujejo:</p>
+
+    <h3>Prvi krog</h3>
+    <ul>
+        <li><strong>Vaše začetno premoženje znaša</strong> {{ endowment_round1 }}</li>
+        <li><strong>Izbira ni obvezna:</strong> Lahko se odločite, da ne boste investirali</li>
+        <li><strong>Fiksna cena:</strong> Fiksna cena delnice je {{ stock_price_round1 }}</li>
+        <li><strong>Vpogled v odločitve drugih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
+        <li><strong>Transakcijski stroški </strong> :V okviru simulacije se za vsako transakcijo odštejejo transakcijski stroški, podobno kot na dejanskih finančnih trgih. V prvem krogu znašajo {{ transaction_cost_round1 }} </li>
+    </ul>
+
+    <h3>Drugi krog</h3>
+    <ul>
+        <li><strong>Vaše premoženje znaša:</strong> {{ endowment_round2 }}</li>
+        <li><strong>Izbira je obvezna:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
+        <li><strong>Cena delnice:</strong> Določena na podlagi povpraševanja in ponudbe</li>
+        <li><strong>Vpogled v odločitve drugih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
+        <li><strong>Svetovalec:</strong> V tem krogu se pojavi svetovalec, katerega priporočilo ustvari računalniški algoritem</li>
+        <li><strong>Transakcijski stroški:</strong> {{ transaction_cost_round2 }}</li>
+    </ul>
+
+    <h3>Tretji krog</h3>
+    <ul>
+        <li><strong>Vaše premoženje znaša:</strong> {{ endowment_round3 }}</li>
+        <li><strong>Izbira je obvezna:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
+        <li><strong>Cena delnice:</strong> Določena na podlagi povpraševanja in ponudbe</li>
+        <li><strong>Vpogled v odločitve druih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
+        <li><strong>Svetovalec:</strong> V tem krogu se pojavi svetovalec, katerega priporočilo ustvari računalniški algoritem</li>
+        <li><strong>Transakcijski stroški:</strong> Možnost A: {{ transaction_cost_round3_optionA }}, Možnost B: {{
+            transaction_cost_round3_optionB }}</li>
     </ul>
 
     <h2>Zaslužki</h2>
