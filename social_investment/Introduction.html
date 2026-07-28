@@ -7,32 +7,32 @@
     <h2>Pregled eksperimenta</h2>
     <p>Sodelovali boste v <strong>{{ C.NUM_ROUNDS }} krogih</strong>. Pogoji eksperimenta se med korgi razlikujejo:</p>
 
-    <h3>Prvo krog</h3>
+    <h3>Prvi krog</h3>
     <ul>
         <li><strong>Začetna vrednost:</strong> {{ endowment_round1 }}</li>
-        <li><strong>Vzdržanje od odločitve:</strong> Lahko se odločite, da ne boste investirali</li>
+        <li><strong>Izbira ni obvezna:</strong> Lahko se odločite, da ne boste investirali</li>
         <li><strong>Fiksna cena:</strong> Fiksna cena delnice je {{ stock_price_round1 }}</li>
-        <li><strong>Vpogled v odločitve druih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
+        <li><strong>Vpogled v odločitve drugih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
         <li><strong>Transakcijski stroški:</strong> {{ transaction_cost_round1 }} </li>
     </ul>
 
     <h3>Drugi krog</h3>
     <ul>
         <li><strong>Začetna vrednost:</strong> {{ endowment_round2 }}</li>
-        <li><strong>Vzdržanje od odločitve:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
+        <li><strong>Izbira je obvezna:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
         <li><strong>Cena delnice:</strong> Določena na podlagi povpraševanja in ponudbe</li>
-        <li><strong>Vpogled v odločitve druih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
-        <li><strong>Zunanji opazovalec:</strong> Pojavi se računalniški opazovalec</li>
+        <li><strong>Vpogled v odločitve drugih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
+        <li><strong>Svetovalec:</strong> V tem krogu se pojavi svetovalec, katerega priporočilo ustvari računalniški algoritem</li>
         <li><strong>Transakcijski stroški:</strong> {{ transaction_cost_round2 }}</li>
     </ul>
 
     <h3>Tretji krog</h3>
     <ul>
         <li><strong>Začetna vrednost:</strong> {{ endowment_round3 }}</li>
-        <li><strong>Vzdržanje od odločitve:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
+        <li><strong>Izbira je obvezna:</strong> Vzdržanje ni mogoče, potrebno je izbrati eno možnost</li>
         <li><strong>Cena delnice:</strong> Določena na podlagi povpraševanja in ponudbe</li>
         <li><strong>Vpogled v odločitve druih udeležencev:</strong> 50% udeležencev ima vpogled v odločitve drugih, 50% pa ne</li>
-        <li><strong>Zunanji opazovalec:</strong>  Pojavi se računalniški opazovalec</li>
+        <li><strong>Svetovalec:</strong> V tem krogu se pojavi svetovalec, katerega priporočilo ustvari računalniški algoritem</li>
         <li><strong>Transakcijski stroški:</strong> Možnost A: {{ transaction_cost_round3_optionA }}, Možnost B: {{
             transaction_cost_round3_optionB }}</li>
     </ul>
@@ -46,7 +46,7 @@
             <br>
             <small>
                 <font color="purple">
-                    <em>(Priporočilo svetovalca je lahko pravilno ali nepravilno. Sami se odločite, ali boste priporočilo upoštevali ali ignorirali.)</em>
+                    <em>(Ob priporočilu svetovalca bo v vsakem krogu prikazana njegova zanesljivost, izražena v odstotkih. Sami se odločite, ali boste priporočilo upoštevali ali ga ignorirali.)</em>
                 </font>
             </small>
         </li>
